@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Core", "OpenReportApp.Core\OpenReportApp.Core.csproj", "{6C6F2C0E-3624-4089-AC51-A13902E7C5CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Model", "OpenReportApp.Model\OpenReportApp.Model.csproj", "{9250BBCA-7F37-445E-B58B-57772E8535A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Service", "OpenReportApp.Service\OpenReportApp.Service.csproj", "{D59407BC-93BC-4C51-9CEC-78FFC207544C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Service.Contracts", "OpenReportApp.Service.Contracts\OpenReportApp.Service.Contracts.csproj", "{FBE43ED4-C1DC-4CB9-927D-11676E7219B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Web.Bootstrapper", "OpenReportApp.Web.Bootstrapper\OpenReportApp.Web.Bootstrapper.csproj", "{17B2ADFB-DA9E-42EC-A73D-9F78A4C87423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Web.Core", "OpenReportApp.Web.Core\OpenReportApp.Web.Core.csproj", "{5D630CE6-BCDF-4E59-AA2D-24297BB5CD20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenReportApp.Web", "OpenReportApp.Web\OpenReportApp.Web.csproj", "{6895978F-02FB-45FF-84AE-F04D60637334}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C6F2C0E-3624-4089-AC51-A13902E7C5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C6F2C0E-3624-4089-AC51-A13902E7C5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C6F2C0E-3624-4089-AC51-A13902E7C5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C6F2C0E-3624-4089-AC51-A13902E7C5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9250BBCA-7F37-445E-B58B-57772E8535A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9250BBCA-7F37-445E-B58B-57772E8535A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9250BBCA-7F37-445E-B58B-57772E8535A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9250BBCA-7F37-445E-B58B-57772E8535A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D59407BC-93BC-4C51-9CEC-78FFC207544C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59407BC-93BC-4C51-9CEC-78FFC207544C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59407BC-93BC-4C51-9CEC-78FFC207544C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59407BC-93BC-4C51-9CEC-78FFC207544C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE43ED4-C1DC-4CB9-927D-11676E7219B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE43ED4-C1DC-4CB9-927D-11676E7219B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE43ED4-C1DC-4CB9-927D-11676E7219B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE43ED4-C1DC-4CB9-927D-11676E7219B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17B2ADFB-DA9E-42EC-A73D-9F78A4C87423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17B2ADFB-DA9E-42EC-A73D-9F78A4C87423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17B2ADFB-DA9E-42EC-A73D-9F78A4C87423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17B2ADFB-DA9E-42EC-A73D-9F78A4C87423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D630CE6-BCDF-4E59-AA2D-24297BB5CD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D630CE6-BCDF-4E59-AA2D-24297BB5CD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D630CE6-BCDF-4E59-AA2D-24297BB5CD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D630CE6-BCDF-4E59-AA2D-24297BB5CD20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6895978F-02FB-45FF-84AE-F04D60637334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6895978F-02FB-45FF-84AE-F04D60637334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6895978F-02FB-45FF-84AE-F04D60637334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6895978F-02FB-45FF-84AE-F04D60637334}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
