@@ -61,6 +61,7 @@
     <Compile Include="ActionFilters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="ActionFilters\ValidateJsonAntiForgeryTokenAttribute.cs" />
     <Compile Include="ActionFilters\ValidateOnlyIncomingValuesAttribute.cs" />
+    <Compile Include="Helpers\AsyncHelper.cs" />
     <Compile Include="Infrastructure\Config\ReportAppSettingsConfiguration.cs" />
     <Compile Include="Infrastructure\Security\AppUserPrincipal.cs" />
     <Compile Include="Infrastructure\AppViewPage.cs" />
