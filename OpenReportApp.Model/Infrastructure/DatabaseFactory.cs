@@ -5,7 +5,7 @@ using OpenReportApp.Model.DataContext;
 
 namespace OpenReportApp.Model.Infrastructure
 {
-    class DatabaseFactory : Disposable, IDatabaseFactory
+    public class DatabaseFactory : Disposable, IDatabaseFactory
     {
         private ApplicationDbContext dataContext;
 

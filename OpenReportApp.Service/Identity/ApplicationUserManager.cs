@@ -9,7 +9,7 @@ namespace OpenReportApp.Service.Identity
 {
     public class ApplicationUserManager : UserManager<User, int>
     {
-        public ApplicationUserManager(IUserStore<User, int> store, IDataProtectionProvider dataProtectionProvider)
+        public ApplicationUserManager(IUserStore<User, int> store, IdentityFactoryOptions<ApplicationUserManager> options)
             : base(store)
         {
             UserValidator = new UserValidator<User, int>(this)
@@ -27,8 +27,13 @@ namespace OpenReportApp.Service.Identity
                 //RequireLowercase = true,
                 //RequireUppercase = true,
             };
-
-            UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            var dataProtectionProvider = options.DataProtectionProvider;
+            if (dataProtectionProvider != null)
+            {
+                this.UserTokenProvider =
+                    new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
+            }
+            //UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"));
         }
     }
 }
