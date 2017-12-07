@@ -7,11 +7,11 @@ namespace OpenReportApp.Model.Infrastructure
 {
     public class DatabaseFactory : Disposable, IDatabaseFactory
     {
-        private ApplicationDbContext dataContext;
+        private ReportDbContext dataContext;
 
-        public ApplicationDbContext Get()
+        public ReportDbContext Init()
         {
-            return dataContext ?? (dataContext = ApplicationDbContext.Create());
+            return dataContext ?? (dataContext = new ReportDbContext());
         }
     }
 }

@@ -13,14 +13,14 @@ namespace OpenReportApp.Model.Data.Identity
                     where TRole:Role
     {
         #region private
-        private DbContext Context;
+        private ReportDbContext Context;
         #endregion
 
         /// <summary>
         /// Constructor that takes a dbmanager as argument 
         /// </summary>
         /// <param name="database"></param>
-        public RoleStore(DbContext dbcontext)
+        public RoleStore(ReportDbContext dbcontext)
         {
             if (dbcontext != null)
             {
@@ -44,33 +44,33 @@ namespace OpenReportApp.Model.Data.Identity
         {
             get
             {
-                return (_roles = Context.Current.Query<Role>(@"select * from Roles").AsQueryable());
+                return (_roles = Context.DB.Query<Role>(@"select * from Roles").AsQueryable());
             }
         }
 
         public async Task CreateAsync(Role role)
         {
-            await Context.Current.Roles.InsertAsync(role);
+            await Context.DB.Roles.InsertAsync(role);
         }
 
         public async Task DeleteAsync(Role role)
         {
-            await Context.Current.Roles.DeleteAsync(role.Id);
+            await Context.DB.Roles.DeleteAsync(role.Id);
         }
 
         public async Task<Role> FindByIdAsync(int roleId)
         {
-            return (await Context.Current.QueryAsync<Role>(@"select * from Roles where Id=@Id", new { Id = roleId })).SingleOrDefault();
+            return (await Context.DB.QueryAsync<Role>(@"select * from Roles where Id=@Id", new { Id = roleId })).SingleOrDefault();
         }
 
         public async Task<Role> FindByNameAsync(string roleName)
         {
-            return (await Context.Current.QueryAsync<Role>(@"select * from Roles where Name=@Name", new { Name = roleName })).SingleOrDefault();
+            return (await Context.DB.QueryAsync<Role>(@"select * from Roles where Name=@Name", new { Name = roleName })).SingleOrDefault();
         }
 
         public async Task UpdateAsync(Role role)
         {
-            await Context.Current.Roles.UpdateAsync(role.Id, role);
+            await Context.DB.Roles.UpdateAsync(role.Id, role);
         }
         #endregion
     }

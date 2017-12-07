@@ -28,14 +28,14 @@ namespace OpenReportApp.Model.Data.Identity
     {
 
         #region private
-        private DbContext Context;
+        private ReportDbContext Context;
         #endregion
 
         /// <summary>
         /// Constructor that takes a dbmanager as argument 
         /// </summary>
         /// <param name="database"></param>
-        public UserStore(DbContext dbcontext)
+        public UserStore(ReportDbContext dbcontext)
         {
             if (dbcontext != null)
             {
@@ -58,13 +58,13 @@ namespace OpenReportApp.Model.Data.Identity
             var result = await FindByEmailAsync(user.Email);
             if (result == null)
             {
-                await Context.Current.Users.InsertAsync(user);
+                await Context.DB.Users.InsertAsync(user);
             }
         }
 
         public async Task UpdateAsync(User user)
         {
-            await Context.Current.Users.UpdateAsync(user.Id, user);
+            await Context.DB.Users.UpdateAsync(user.Id, user);
         }
 
         public async Task DeleteAsync(User user)
@@ -78,12 +78,12 @@ namespace OpenReportApp.Model.Data.Identity
 
         public async Task<User> FindByIdAsync(int userId)
         {
-            return (await Context.Current.QueryAsync<User>(@"select * from Users where Id=@Id", new { Id = userId })).SingleOrDefault();
+            return (await Context.DB.QueryAsync<User>(@"select * from Users where Id=@Id", new { Id = userId })).SingleOrDefault();
         }
 
         public async Task<User> FindByNameAsync(string userName)
         {
-            return (await Context.Current.QueryAsync<User>(@"select * from Users where UserName=@Name", new { Name = userName })).SingleOrDefault();
+            return (await Context.DB.QueryAsync<User>(@"select * from Users where UserName=@Name", new { Name = userName })).SingleOrDefault();
         }
 
         #endregion
@@ -91,7 +91,7 @@ namespace OpenReportApp.Model.Data.Identity
         #region IUserEmailStore
         public async Task<User> FindByEmailAsync(string email)
         {
-            return (await Context.Current.QueryAsync<User>(@"select * from Users where Email=@Email", new { Email = email })).SingleOrDefault();
+            return (await Context.DB.QueryAsync<User>(@"select * from Users where Email=@Email", new { Email = email })).SingleOrDefault();
         }
 
         public Task<string> GetEmailAsync(User user)
@@ -102,12 +102,12 @@ namespace OpenReportApp.Model.Data.Identity
 
         public async Task SetEmailAsync(User user, string email)
         {
-            User u = await Context.Current.Users.GetAsync(user.Id);
+            User u = await Context.DB.Users.GetAsync(user.Id);
             if (user != null)
             {
                 user.Email = email;
 
-                await Context.Current.Users.UpdateAsync(u.Id, u);
+                await Context.DB.Users.UpdateAsync(u.Id, u);
             }
         }
 
@@ -132,13 +132,13 @@ namespace OpenReportApp.Model.Data.Identity
 
         public async Task SetPhoneNumberAsync(User user, string phoneNumber)
         {
-            User u = await Context.Current.Users.GetAsync(user.Id);
+            User u = await Context.DB.Users.GetAsync(user.Id);
 
             if (user != null)
             {
                 user.PhoneNumber = phoneNumber;
 
-                await Context.Current.Users.UpdateAsync(u.Id, u);
+                await Context.DB.Users.UpdateAsync(u.Id, u);
             }
         }
 
@@ -156,7 +156,7 @@ namespace OpenReportApp.Model.Data.Identity
 
         public async Task<string> GetSecurityStampAsync(User user)
         {
-            return (await Context.Current.Users.GetAsync(user.Id)).SecurityStamp;
+            return (await Context.DB.Users.GetAsync(user.Id)).SecurityStamp;
         }
 
         public Task SetSecurityStampAsync(User user, string stamp)
@@ -177,7 +177,7 @@ namespace OpenReportApp.Model.Data.Identity
         {
             get
             {
-                return Context.Current.Users.All().AsQueryable();
+                return Context.DB.Users.All().AsQueryable();
             }
         }
         #endregion
@@ -213,7 +213,7 @@ namespace OpenReportApp.Model.Data.Identity
         #region IUserRoleStore
         public async Task AddToRoleAsync(User user, string roleName)
         {
-            Role role = (await Context.Current.QueryAsync<Role>(@"select * from Roles where Name=@RoleName", new { RoleName = roleName })).SingleOrDefault();
+            Role role = (await Context.DB.QueryAsync<Role>(@"select * from Roles where Name=@RoleName", new { RoleName = roleName })).SingleOrDefault();
             if (role == null)
             {
                 throw new InvalidOperationException(string.Format("Role {0} not found.", roleName));
@@ -225,19 +225,19 @@ namespace OpenReportApp.Model.Data.Identity
                 UserId = user.Id,
             };
 
-            await Context.Current.UserRoles.InsertAsync(instance);
+            await Context.DB.UserRoles.InsertAsync(instance);
         }
 
         public async Task<IList<string>> GetRolesAsync(User user)
         {
-            return (await Context.Current
+            return (await Context.DB
                     .QueryAsync<Role>(@"select R.* from UserRoles UR inner join Roles R on UR.RoleId=R.Id where UR.UserId=@UserId", new { UserId = user.Id }))
                     .Select(x => x.Name)
                     .ToList();
         }
         public async Task<bool> IsInRoleAsync(User user, string roleName)
         {
-            return (await Context.Current
+            return (await Context.DB
                     .QueryAsync<Role>(@"select R.* from UserRoles UR inner join Roles R on UR.RoleId=R.Id where UR.UserId=@UserId and R.Name=@RoleName", new { UserId = user.Id, RoleName = roleName }))
                     .Count() == 1;
         }
@@ -268,13 +268,13 @@ namespace OpenReportApp.Model.Data.Identity
         //}
         public async Task RemoveFromRoleAsync(User user, string roleName)
         {
-            Role role = (await Context.Current.QueryAsync<Role>(@"select * from Roles where Name=@RoleName", new { RoleName = roleName })).SingleOrDefault();
+            Role role = (await Context.DB.QueryAsync<Role>(@"select * from Roles where Name=@RoleName", new { RoleName = roleName })).SingleOrDefault();
             if (role == null)
             {
                 throw new InvalidOperationException(string.Format("Role {0} not found.", roleName));
             }
 
-            await Context.Current.ExecuteAsync("delete UR from UserRoles UR inner join Roles R on UR.RoleId=R.Id where UR.UserId=@UserId and R.Name=@RoleName", new { UserId = user.Id, RoleName = roleName }).ConfigureAwait(false);
+            await Context.DB.ExecuteAsync("delete UR from UserRoles UR inner join Roles R on UR.RoleId=R.Id where UR.UserId=@UserId and R.Name=@RoleName", new { UserId = user.Id, RoleName = roleName }).ConfigureAwait(false);
         }
         #endregion
 
@@ -288,12 +288,12 @@ namespace OpenReportApp.Model.Data.Identity
                 ClaimValue = claim.Value,
             };
 
-            await Context.Current.UserClaims.InsertAsync(instance);
+            await Context.DB.UserClaims.InsertAsync(instance);
         }
 
         public async Task<IList<Claim>> GetClaimsAsync(User user)
         {
-            return (await Context.Current
+            return (await Context.DB
                     .QueryAsync<UserClaim>(@"select * from UserClaims where UserId=@UserId", new { UserId = user.Id }))
                     .Select(x => new Claim(x.ClaimType, x.ClaimValue))
                     .ToList();
@@ -301,7 +301,7 @@ namespace OpenReportApp.Model.Data.Identity
 
         public async Task RemoveClaimAsync(User user, Claim claim)
         {
-            await Context.Current.ExecuteAsync("delete from UserClaims where UserId=@UserId and ClaimValue=@ClaimValue and ClaimType=@ClaimType", new { UserId = user.Id, ClaimValue = claim.Value, ClaimType = claim.Type }).ConfigureAwait(false);
+            await Context.DB.ExecuteAsync("delete from UserClaims where UserId=@UserId and ClaimValue=@ClaimValue and ClaimType=@ClaimType", new { UserId = user.Id, ClaimValue = claim.Value, ClaimType = claim.Type }).ConfigureAwait(false);
         }
         #endregion
 

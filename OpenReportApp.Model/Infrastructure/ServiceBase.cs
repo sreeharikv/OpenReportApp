@@ -7,7 +7,7 @@ namespace OpenReportApp.Model.Infrastructure
 {
     public abstract class ServiceBase 
     {
-        private DbContext dataContext;
+        private ReportDbContext dataContext;
 
         public ServiceBase(IDatabaseFactory DbFactory)
         {
@@ -20,9 +20,9 @@ namespace OpenReportApp.Model.Infrastructure
 
         protected IDatabaseFactory DatabaseFactory { get; private set; }
 
-        protected DbContext DataContext
+        protected ReportDbContext DataContext
         {
-            get { return dataContext ?? (dataContext = DatabaseFactory.Get()); }
+            get { return dataContext ?? (dataContext = DatabaseFactory.Init()); }
         } 
     }
 }

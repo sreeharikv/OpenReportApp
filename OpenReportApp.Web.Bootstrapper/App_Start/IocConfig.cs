@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using OpenReportApp.Web.Bootstrapper;
+using OpenReportApp.Web.Controllers;
 
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(IocConfig), "RegisterDependencies")]
@@ -21,6 +22,7 @@ namespace OpenReportApp.Web.Bootstrapper
             builder.RegisterModule(new IdentityModule());
 
             // register mvc controllers
+            builder.RegisterControllers(typeof(HomeController).Assembly);
 
             // register webapi controller
 

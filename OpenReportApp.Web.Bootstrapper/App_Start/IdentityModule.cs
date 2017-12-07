@@ -9,6 +9,7 @@ using Microsoft.Owin.Security;
 using OpenReportApp.Model.Data.Identity;
 using OpenReportApp.Model.Entities.Identity;
 using OpenReportApp.Service.Identity;
+using OpenReportApp.Model.DataContext;
 
 
 namespace OpenReportApp.Web.Bootstrapper
@@ -17,21 +18,19 @@ namespace OpenReportApp.Web.Bootstrapper
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //user store
+            //builder.Register(c => new UserStore<User>(c.Resolve<ApplicationDbContext>())).As<IUserStore<User, int>>().InstancePerRequest();
             builder.RegisterType<UserStore<User>>().As<IUserStore<User,int>>().InstancePerRequest();
-            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-
-            //rolestore
             builder.RegisterType<RoleStore<Role>>().As<IRoleStore<Role, int>>().InstancePerRequest();
-            builder.RegisterType<ApplicationRoleManager>().AsSelf();
 
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
+            builder.RegisterType<ApplicationRoleManager>().AsSelf().InstancePerRequest();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerRequest();
 
             builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
 
             builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>
             {
-                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("Application​")
+                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("ApplicationName​")
             }); 
             
         }

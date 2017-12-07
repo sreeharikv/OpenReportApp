@@ -7,6 +7,6 @@ namespace OpenReportApp.Model.Infrastructure
 {
     public interface IDatabaseFactory : IDisposable
     {
-        ApplicationDbContext Get();
+        ReportDbContext Init();
     }
 }

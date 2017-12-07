@@ -51,8 +51,7 @@
     <Compile Include="Dapper\IgnorePropertyAttribute.cs" />
     <Compile Include="Dapper\Snapshotter.cs" />
     <Compile Include="Dapper\SqlBuilder.cs" />
-    <Compile Include="DataContext\ApplicationDbContext.cs" />
-    <Compile Include="DataContext\DbContext.cs" />
+    <Compile Include="DataContext\ReportDbContext.cs" />
     <Compile Include="Data\Identity\RoleStore.cs" />
     <Compile Include="Data\Identity\UserStore.cs" />
     <Compile Include="Entities\Identity\User.cs" />
